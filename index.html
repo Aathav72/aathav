@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aathav Buddy next to you</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <div id="scrollProgress" aria-hidden="true"></div>
+    <canvas id="bg3d" aria-hidden="true"></canvas>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <button id="hamburger" class="hamburger" type="button" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <a href="#home" class="nav-brand" aria-label="Go to home">
+                <span class="nav-brand-tagline">AI • Data • Automation</span>
+            </a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#awards" class="nav-link">Awards</a></li>
+                <li><a href="#volunteer" class="nav-link">Volunteer</a></li>
+                <li><a href="#certifications" class="nav-link">Certifications</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="nav-controls">
+                <span class="nav-status">Available for Internship</span>
+                <a href="./Aathavan%20Resume.pdf" class="nav-resume-view" target="_blank" rel="noopener noreferrer">
+                    <i class="fas fa-eye"></i>
+                    View Resume
+                </a>
+                <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title">Hi, I'm <span class="gradient-text">AATHAVAN GANESAN</span></h1>
+                <h2 class="hero-subtitle"><span class="typing"></span></h2>
+                <p class="hero-description">Young Entrepreneur | IT Student | Aspiring Data Engineer | Passionate about AI, data science, and
+                    automation</p>
+                <div class="hero-buttons">
+                    <a href="#projects" class="action-btn action-btn-primary">View My Projects</a>
+                    <a href="#contact" class="action-btn action-btn-primary">Contact Me</a>
+                </div>
+            </div>
+            <div class="hero-accent"></div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about reveal">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="about-image">
+                    <img class="profile-image" src="./assets.jpeg" alt="Portrait of Aathavan Ganesan">
+                </div>
+                <div class="about-text">
+                    <p>I am an Information Technology student with a strong interest in AI, data science, and
+                        automation. I am currently building my technical expertise through academic learning,
+                        internships, and hands-on projects while actively taking up leadership roles in college. I focus
+                        on developing practical solutions, improving my problem-solving skills, and continuously growing
+                        as a technology-driven professional.</p>
+                    <div class="about-details">
+                        <div class="detail-item">
+                            <i class="fas fa-graduation-cap"></i>
+                            <div>
+                                <h4>Education</h4>
+                                <p>B.Tech in Information Technology</p>
+                                <p class="detail-org">K.S.Rangasamy College of Technology</p>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <h4>Location</h4>
+                                <p>Salem, Tamil Nadu, India</p>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-heart"></i>
+                            <div>
+                                <h4>Interests</h4>
+                                <p>Data Analysis, Machine Learning, Public Speaking, Leadership Development</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills reveal">
+        <div class="container">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Programming Languages</h3>
+                    <ul class="skill-list">
+                        <li>C</li>
+                        <li>Python</li>
+                        <li>SQL</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>Data Science & Analysis</h3>
+                    <ul class="skill-list">
+                        <li>Data Analysis</li>
+                        <li>Machine Learning</li>
+                        <li>Data Visualization</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>Tools & Technologies</h3>
+                    <ul class="skill-list">
+                        <li>Excel & Power BI</li>
+                        <li>Git & GitHub</li>
+                        <li>Altair Rapidmainer</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="soft-skill-spacer"></div>
+            <div class="soft-skill-spacer"></div>
+            <h2 class="section-title">Soft Skills</h2>
+            <div class="soft-skills-wrap">
+                <ul class="soft-skill-list">
+                    <li>Public Speaking</li>
+                    <li>Leadership</li>
+                    <li>Team Building</li>
+                    <li>Time Management</li>
+                    <li>Resource Management</li>
+                    <li>Adaptability</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="projects reveal">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card" data-project="project1">
+                    <div class="project-image">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <h3>College CSR Impact Tracker BOT</h3>
+                    <p>Built an interactive bot that tracks and visualizes the impact of college's Corporate Social
+                        Responsibility (CSR) initiatives using Uipath Robotic Process Automation</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Excel</span>
+                        <span class="tech-tag">UiPath RPA</span>
+                        <span class="tech-tag">Power BI</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/Aathav72" target="_blank"
+                            class="action-btn action-btn-small">GitHub</a>
+                        <a href="https://example.com" target="_blank" class="action-btn action-btn-small">Live Demo</a>
+                    </div>
+                    <button class="action-btn action-btn-small" onclick="openModal('project1')">Learn More</button>
+                </div>
+
+                <div class="project-card" data-project="project3">
+                    <div class="project-image">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>AI Driven Waste Scrap cleaner BoT</h3>
+                    <p>Designed and developed a prototype for an AI-driven waste scrap cleaner bot using IoT</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Embedded C</span>
+                        <span class="tech-tag">IoT</span>
+                        <span class="tech-tag">AI</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/Aathav72" target="_blank"
+                            class="action-btn action-btn-small">GitHub</a>
+                        <a href="https://example.com" target="_blank" class="action-btn action-btn-small">Live Demo</a>
+                    </div>
+                    <button class="action-btn action-btn-small" onclick="openModal('project3')">Learn More</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Awards Section -->
+    <section id="awards" class="awards reveal">
+        <div class="container">
+            <h2 class="section-title">Awards & Recognition</h2>
+            <div class="awards-list">
+                <div class="award-item">
+                    <div class="award-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div class="award-content">
+                        <h3>Best Readers Club Member Award 2025</h3>
+                        <p class="award-org">KSRCT Readers Club</p>
+                        <p class="award-desc">Recognized for outstanding contributions to the readers club and active
+                            participation in club events</p>
+                    </div>
+                </div>
+                <div class="award-item">
+                    <div class="award-icon">
+                        <i class="fas fa-medal"></i>
+                    </div>
+                    <div class="award-content">
+                        <h3>Winner SD Public Speaking</h3>
+                        <p class="award-org">Advanced Leadership Camp - 2024</p>
+                        <p class="award-desc">Secured 1st place in Public Speaking Competition during the NCC Advanced
+                            leadership Camp at NITK Surathkal</p>
+                    </div>
+                </div>
+                <div class="award-item">
+                    <div class="award-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <div class="award-content">
+                        <h3>Best Innovative Idea</h3>
+                        <p class="award-org">SRMIST Xplore Eventure</p>
+                        <p class="award-desc">Awarded with Best Innovative Idea award</p>
+                    </div>
+                </div>
+                <div class="award-item award-item-center">
+                    <div class="award-icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <div class="award-content">
+                        <h3>NCC B Certificate</h3>
+                        <p class="award-org">National Cadet Corps (NCC)</p>
+                        <p class="award-desc">Awarded NCC B Certificate with A grade</p>
+                    </div>
+                </div>
+                <div class="award-item">
+                    <div class="award-icon">
+                        <i class="fas fa-certificate"></i>
+                        </div>
+                    <div class="award-content">
+                        <h3>EDII TN Voucher A Grant</h3>
+                        <p class="award-org">EDII Tamil Nadu</p>
+                        <p class="award-desc">Received a voucher grant of Rs.3,00,000 from EDII Tamil Nadu for the development of project form prototype</p>
+                    </div>
+                </div>
+        </div>
+    </section>
+
+    <!-- Volunteer Experience Section -->
+    <section id="volunteer" class="volunteer reveal">
+        <div class="container">
+            <h2 class="section-title">Volunteer Experience</h2>
+            <div class="timeline">
+                    <div class="timeline-item left">
+                        <div class="volunteer-item">
+                            <div class="volunteer-header">
+                                <h3>Volship Leader</h3>
+                                <span class="volunteer-period">Apr 2024 - Jul 2024</span>
+                            </div>
+                            <p class="volunteer-org">Bhumi Volship Fellowship</p>
+                            <p>Lead a team of 30 members for 4 months in transforming the lives of 30
+                                students in the age group 17-19 through mentorship and leadership development programs.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item right">
+                        <div class="volunteer-item">
+                            <div class="volunteer-header">
+                                <h3>NCC Cadet</h3>
+                                <span class="volunteer-period">Sep 2023 - Feb 2025</span>
+                            </div>
+                            <p class="volunteer-org">National Cadet Corps (NCC)</p>
+                            <p>Served two years in NCC, engaging in drills, camps, and community service.
+                                Participated in the Basic Leadership Camp and qualified for the Advanced Leadership Camp at
+                                NITK Surathkal (1st place in Public Speaking).</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item left">
+                        <div class="volunteer-item">
+                            <div class="volunteer-header">
+                                <h3>Secretary</h3>
+                                <span class="volunteer-period">Aug 2025 - Present</span>
+                            </div>
+                            <p class="volunteer-org">Zealous Information Technology Association-KSRCT</p>
+                            <p>Representing the association in events, helping with technical workshops, and promoting IT
+                                initiatives.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item right">
+                        <div class="volunteer-item">
+                            <div class="volunteer-header">
+                                <h3>Campus Ambassador</h3>
+                                <span class="volunteer-period">Aug 2025 - Present</span>
+                            </div>
+                            <p class="volunteer-org">K.S.Rangasamy College of Technology</p>
+                            <p>Promoting college activities and engaging with students/faculty to enhance visibility.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item left">
+                        <div class="volunteer-item">
+                            <div class="volunteer-header">
+                                <h3>Chapter Co-Chair</h3>
+                                <span class="volunteer-period">Jun 2024 - Jan 2026</span>
+                            </div>
+                            <p class="volunteer-org">Yi Yuva KSRCT Chapter</p>
+                            <p>Leading Health and Wellness initiatives to promote student/staff well-being through campaigns
+                                and awareness programs.</p>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modals -->
+    <div class="modal" id="project1">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('project1')">&times;</button>
+            <h2>College CSR Impact Tracker Bot</h2>
+            <p>Built an interactive bot that tracks and visualizes the impact of the college's Corporate Social
+                Responsibility (CSR) initiatives using UiPath Robotic Process Automation.</p>
+            <h3>Key Features:</h3>
+            <ul>
+                <li>Automated data capture and validation from CSR activities</li>
+                <li>Consolidated Excel reporting for impact metrics</li>
+                <li>Transformed data into reports for stakeholders</li>
+                <li>Power BI dashboards for trends and outcomes</li>
+                <li>Scheduled updates with error handling and audit logs</li>
+            </ul>
+            <p><strong>Technologies:</strong> Excel, UiPath RPA, Power BI</p>
+        </div>
+    </div>
+
+    <div class="modal" id="project3">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('project3')">&times;</button>
+            <h2>AI Driven Waste Scrap Cleaner Bot</h2>
+            <p>Designed and developed a prototype for an AI-driven waste scrap cleaner bot using IoT.</p>
+            <h3>Key Features:</h3>
+            <ul>
+                <li>Sensor-based waste detection and tracking</li>
+                <li>Automated collection and routing logic</li>
+                <li>IoT monitoring for status and diagnostics</li>
+                <li>AI-assisted classification for scrap handling</li>
+            </ul>
+            <p><strong>Technologies:</strong> Embedded C, IoT, AI</p>
+        </div>
+    </div>
+
+    <!-- Certifications Section -->
+    <section id="certifications" class="certifications reveal">
+        <div class="container">
+            <h2 class="section-title">Certifications</h2>
+            <div class="certifications-grid">
+                <div class="cert-card">
+                    <div class="cert-icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <h3>UiPath Automation Explorer for Students</h3>
+                    <p class="cert-issuer">UiPath Academy</p>
+                    <p class="cert-year">2025</p>
+                    <a href="./Uipath%20Automation%20Explorer%20for%20Students.pdf" target="_blank" rel="noopener noreferrer" class="cert-link">View Credential</a>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>OCI Data Science Professional</h3>
+                    <p class="cert-issuer">Oracle University</p>
+                    <p class="cert-year">2025</p>
+                    <a href="./OCI.pdf" target="_blank" rel="noopener noreferrer" class="cert-link">View Credential</a>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>Automation Explorer Associate </h3>
+                    <p class="cert-issuer">Uipath Academy</p>
+                    <p class="cert-year">2024</p>
+                    <a href="./Automation%20Developer%20Associate%20%20Cohort%202.pdf" target="_blank" rel="noopener noreferrer" class="cert-link">View Credential</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact reveal">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <p class="section-subtitle">Have a project in mind? Let's work together!</p>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email</h4>
+                            <p><a href="mailto:aathavang123002@gmail.com">aathavang123002@gmail.com</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h4>Phone</h4>
+                            <p><a href="tel:+919600802107">+91 9600802107</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>Address</h4>
+                            <p>205/8, Muniyappan Kovil Street,<br> Kondalampatty,<br> Salem - 636010,<br> Tamil
+                                Nadu,<br> India</p>
+                        </div>
+                    </div>
+                </div>
+                <form class="contact-form" id="contactForm" novalidate>
+                    <div class="form-group">
+                        <input type="text" name="name" placeholder="Your Name" required>
+                        <small class="form-error" id="nameError"></small>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="email" placeholder="Your Email" required>
+                        <small class="form-error" id="emailError"></small>
+                    </div>
+                    <div class="form-group">
+                        <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+                        <small class="form-error" id="messageError"></small>
+                    </div>
+                    <button type="submit" class="action-btn action-btn-primary">Send Message</button>
+                </form>
+                <div id="successMessage" class="success-message"
+                    style="display:none; margin-top:20px; padding:15px; background-color:#d4edda; border:1px solid #c3e6cb; border-radius:8px; color:#155724;">
+                    <strong>✓ Message Sent!</strong> Your message has been saved and I'll get back to you soon.
+                </div>
+                <div id="errorMessage" class="error-message"
+                    style="display:none; margin-top:20px; padding:15px; background-color:#f8d7da; border:1px solid #f5c2c7; border-radius:8px; color:#842029;">
+                    <strong>✗ Message Failed.</strong> Please try again in a moment.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#projects">Projects</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Follow Me</h4>
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/in/aathavanganesan/" target="_blank" aria-label="LinkedIn"><i
+                                class="fab fa-linkedin"></i></a>
+                        <a href="https://github.com/Aathav72" target="_blank" aria-label="GitHub"><i
+                                class="fab fa-github"></i></a>
+                        <a href="https://www.instagram.com/_.aathav._" target="_blank" aria-label="Instagram"><i
+                                class="fab fa-instagram"></i></a>
+                        <a href="mailto:aathavang123002@gmail.com" target="_blank" aria-label="Email"><i
+                                class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Aathavan. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        window.SUPABASE_URL = "";
+        window.SUPABASE_ANON_KEY = "";
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r160/three.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
