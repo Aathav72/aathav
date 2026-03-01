@@ -35,7 +35,17 @@ html { scroll-behavior: smooth; }
 
 body {
     font-family: var(--font-sans);
-    background: transparent !important;
+    background:
+        radial-gradient(140% 140% at 12% 18%, rgba(42,124,255,0.12), transparent 42%),
+        radial-gradient(140% 140% at 85% 12%, rgba(123,97,255,0.10), transparent 38%),
+        radial-gradient(120% 120% at 50% 82%, rgba(33,209,183,0.12), transparent 42%),
+        linear-gradient(135deg, rgba(255,166,43,0.12), rgba(255,93,177,0.10)),
+        repeating-linear-gradient(45deg,
+            color-mix(in srgb, var(--primary) 8%, transparent) 0,
+            color-mix(in srgb, var(--primary) 8%, transparent) 1px,
+            transparent 1px,
+            transparent 14px),
+        var(--bg);
     color: var(--text);
     line-height: 1.6;
     min-height: 100vh;
@@ -45,21 +55,7 @@ body {
     overflow-x: hidden;
 }
 
-/* 3D background canvas */
-#bg {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-}
-
-body.dark {
-    background: transparent !important;
-}
-
-section { padding: 5rem 1.4rem; position: relative; overflow: hidden; background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(6px); }
+section { padding: 5rem 1.4rem; position: relative; overflow: hidden; background: none; backdrop-filter: none; }
 section[id] { scroll-margin-top: 96px; }
 
 .container { max-width: var(--content); margin: 0 auto; width: 100%; }
