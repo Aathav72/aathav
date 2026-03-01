@@ -11,9 +11,8 @@
 </head>
 
 <body>
-
-    <div id="scrollProgress" aria-hidden="true"></div>
     <canvas id="bg" aria-hidden="true"></canvas>
+    <div id="scrollProgress" aria-hidden="true"></div>
 
     <!-- Navigation -->
     <nav class="navbar">
@@ -491,64 +490,69 @@
     </footer>
 
         <script>
-                window.SUPABASE_URL = "";
-                window.SUPABASE_ANON_KEY = "";
+                        window.SUPABASE_URL = "";
+                        window.SUPABASE_ANON_KEY = "";
         </script>
         <script src="script.js"></script>
 
         <script>
-            const canvas = document.getElementById("bg");
-            const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(
-                75,
-                window.innerWidth / window.innerHeight,
-                0.1,
-                1000
-            );
-            const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
+        const canvas = document.getElementById("bg");
+
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(
+            75,
+            window.innerWidth / window.innerHeight,
+            0.1,
+            1000
+        );
+
+        const renderer = new THREE.WebGLRenderer({
+            canvas: canvas,
+            alpha: true
+        });
+
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(window.devicePixelRatio);
+
+        camera.position.z = 20;
+
+        const particleCount = 6000;
+        const geometry = new THREE.BufferGeometry();
+        const positions = new Float32Array(particleCount * 3);
+
+        for (let i = 0; i < particleCount * 3; i++) {
+            positions[i] = (Math.random() - 0.5) * 300;
+        }
+
+        geometry.setAttribute(
+            "position",
+            new THREE.BufferAttribute(positions, 3)
+        );
+
+        const material = new THREE.PointsMaterial({
+            size: 0.7,
+            color: 0x00ffff,
+            transparent: true,
+            opacity: 0.8
+        });
+
+        const particles = new THREE.Points(geometry, material);
+        scene.add(particles);
+
+        function animate() {
+            requestAnimationFrame(animate);
+            particles.rotation.x += 0.0006;
+            particles.rotation.y += 0.0005;
+            renderer.render(scene, camera);
+        }
+
+        animate();
+
+        window.addEventListener("resize", () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
             renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.setPixelRatio(window.devicePixelRatio);
-
-            camera.position.z = 15;
-
-            const particleCount = 8000;
-            const geometry = new THREE.BufferGeometry();
-            const positions = new Float32Array(particleCount * 3);
-
-            for (let i = 0; i < particleCount * 3; i++) {
-                positions[i] = (Math.random() - 0.5) * 200;
-            }
-
-            geometry.setAttribute(
-                "position",
-                new THREE.BufferAttribute(positions, 3)
-            );
-
-            const material = new THREE.PointsMaterial({
-                size: 0.6,
-                color: 0x00ffff,
-                transparent: true,
-                opacity: 0.8,
-            });
-
-            const particles = new THREE.Points(geometry, material);
-            scene.add(particles);
-
-            function animate() {
-                requestAnimationFrame(animate);
-                particles.rotation.x += 0.0009;
-                particles.rotation.y += 0.0008;
-                particles.rotation.z += 0.0007;
-                renderer.render(scene, camera);
-            }
-
-            animate();
-
-            window.addEventListener("resize", () => {
-                camera.aspect = window.innerWidth / window.innerHeight;
-                camera.updateProjectionMatrix();
-                renderer.setSize(window.innerWidth, window.innerHeight);
-            });
+        });
         </script>
 </body>
 

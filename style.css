@@ -35,13 +35,14 @@ html { scroll-behavior: smooth; }
 
 body {
     font-family: var(--font-sans);
-    background: transparent;
-    background-color: #05080f;
+    background: transparent !important;
     color: var(--text);
     line-height: 1.6;
     min-height: 100vh;
     padding-top: 78px;
     transition: background 0.35s ease, color 0.35s ease;
+    margin: 0;
+    overflow-x: hidden;
 }
 
 /* 3D background canvas */
@@ -55,11 +56,10 @@ body {
 }
 
 body.dark {
-    background: transparent;
-    background-color: #03060c;
+    background: transparent !important;
 }
 
-section { padding: 5rem 1.4rem; position: relative; overflow: hidden; backdrop-filter: blur(8px); background: rgba(0,0,0,0.4) !important; }
+section { padding: 5rem 1.4rem; position: relative; overflow: hidden; background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(6px); }
 section[id] { scroll-margin-top: 96px; }
 
 .container { max-width: var(--content); margin: 0 auto; width: 100%; }
