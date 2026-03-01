@@ -50,6 +50,7 @@
             }
             themeToggle.setAttribute('aria-pressed', String(dark));
         }
+        window.dispatchEvent(new CustomEvent('themechange', { detail: { mode } }));
     }
 
     function setupTheme() {
@@ -261,38 +262,93 @@
         if (!canvas || !window.THREE) return;
 
         const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
-        camera.position.set(0, 0, 6);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-        const geometry = new THREE.IcosahedronGeometry(1.2, 1);
-        const material = new THREE.MeshStandardMaterial({
-            color: 0x4da3ff,
-            metalness: 0.2,
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1200);
+        camera.position.set(0, 0, 7);
+
+        const getPalette = () => {
+            const styles = getComputedStyle(document.body);
+            const toHex = (value) => Number(`0x${value.trim().replace('#', '') || 'ffffff'}`);
+            return {
+                primary: toHex(styles.getPropertyValue('--primary') || '#2a7cff'),
+                accent: toHex(styles.getPropertyValue('--accent') || '#7b61ff'),
+                text: toHex(styles.getPropertyValue('--text') || '#1c2834'),
+                bg: toHex((document.body.classList.contains('dark') ? '#0b0f17' : '#f7f9fc'))
+            };
+        };
+
+        const palette = getPalette();
+        renderer.setClearColor(palette.bg, document.body.classList.contains('dark') ? 0.24 : 0.08);
+        scene.fog = new THREE.FogExp2(document.body.classList.contains('dark') ? 0x0b0f17 : 0xf5f7fb, 0.045);
+
+        const coreGeometry = new THREE.TorusKnotGeometry(1, 0.26, 300, 32, 2, 5);
+        const coreMaterial = new THREE.MeshStandardMaterial({
+            color: palette.primary,
+            metalness: 0.55,
             roughness: 0.25,
-            emissive: 0x112233,
+            emissive: palette.accent,
             emissiveIntensity: 0.35,
             transparent: true,
             opacity: 0.9
         });
-        const core = new THREE.Mesh(geometry, material);
+        const core = new THREE.Mesh(coreGeometry, coreMaterial);
         scene.add(core);
 
+        const ringGeometry = new THREE.RingGeometry(2.3, 2.6, 80, 1);
+        const ringMaterial = new THREE.MeshBasicMaterial({
+            color: palette.accent,
+            side: THREE.DoubleSide,
+            transparent: true,
+            opacity: 0.32
+        });
+        const ring = new THREE.Mesh(ringGeometry, ringMaterial);
+        ring.rotation.x = Math.PI / 3;
+        scene.add(ring);
+
         const particleGeometry = new THREE.BufferGeometry();
-        const particleCount = 400;
+        const particleCount = 950;
         const positions = new Float32Array(particleCount * 3);
-        for (let i = 0; i < particleCount * 3; i++) {
-            positions[i] = (Math.random() - 0.5) * 30;
+        for (let i = 0; i < particleCount; i++) {
+            const radius = 14 + Math.random() * 12;
+            const theta = Math.random() * Math.PI * 2;
+            const phi = Math.acos((Math.random() * 2) - 1);
+            const idx = i * 3;
+            positions[idx] = radius * Math.sin(phi) * Math.cos(theta);
+            positions[idx + 1] = radius * Math.sin(phi) * Math.sin(theta);
+            positions[idx + 2] = radius * Math.cos(phi);
         }
         particleGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-        const particleMaterial = new THREE.PointsMaterial({ color: 0xffffff, size: 0.04, opacity: 0.7, transparent: true });
+        const particleMaterial = new THREE.PointsMaterial({ color: 0xffffff, size: 0.04, opacity: 0.65, transparent: true });
         const particles = new THREE.Points(particleGeometry, particleMaterial);
         scene.add(particles);
 
-        const ambient = new THREE.AmbientLight(0xffffff, 0.7);
-        const directional = new THREE.DirectionalLight(0x88c0ff, 0.8);
-        directional.position.set(5, 5, 5);
-        scene.add(ambient, directional);
+        const orbGroup = new THREE.Group();
+        const orbGeometry = new THREE.SphereGeometry(0.08, 16, 16);
+        for (let i = 0; i < 22; i++) {
+            const orbMaterial = new THREE.MeshStandardMaterial({
+                color: i % 2 === 0 ? palette.primary : palette.accent,
+                emissive: i % 2 === 0 ? palette.primary : palette.accent,
+                emissiveIntensity: 0.75,
+                roughness: 0.3,
+                metalness: 0.4
+            });
+            const orb = new THREE.Mesh(orbGeometry, orbMaterial);
+            const radius = 1.8 + Math.random() * 1.2;
+            const angle = (i / 22) * Math.PI * 2;
+            orb.position.set(Math.cos(angle) * radius, Math.sin(angle * 1.3) * 0.6, Math.sin(angle) * radius);
+            orb.userData = { radius, speed: 0.004 + Math.random() * 0.003, offset: Math.random() * Math.PI * 2 };
+            orbGroup.add(orb);
+        }
+        scene.add(orbGroup);
+
+        const ambient = new THREE.AmbientLight(0xffffff, 0.55);
+        const directional = new THREE.DirectionalLight(palette.primary, 0.7);
+        directional.position.set(5, 6, 5);
+        const rim = new THREE.PointLight(palette.accent, 1.2, 18);
+        rim.position.set(-3, -2, 3);
+        scene.add(ambient, directional, rim);
 
         let mouseX = 0;
         let mouseY = 0;
@@ -310,14 +366,40 @@
         window.addEventListener('resize', onResize);
         onResize();
 
+        function updatePalette() {
+            const next = getPalette();
+            coreMaterial.color.setHex(next.primary);
+            coreMaterial.emissive.setHex(next.accent);
+            ringMaterial.color.setHex(next.accent);
+            particleMaterial.color.setHex(0xffffff);
+            directional.color.setHex(next.primary);
+            rim.color.setHex(next.accent);
+            renderer.setClearColor(next.bg, document.body.classList.contains('dark') ? 0.24 : 0.08);
+            scene.fog.color.setHex(document.body.classList.contains('dark') ? 0x0b0f17 : 0xf5f7fb);
+        }
+
+        window.addEventListener('themechange', updatePalette);
+
         function animate() {
             requestAnimationFrame(animate);
-            core.rotation.x += 0.0035;
-            core.rotation.y += 0.0045;
-            particles.rotation.y += 0.0008;
-            particles.rotation.x -= 0.0004;
-            camera.position.x += (mouseX * 1.2 - camera.position.x) * 0.02;
-            camera.position.y += (-mouseY * 1.2 - camera.position.y) * 0.02;
+            core.rotation.x += 0.004;
+            core.rotation.y += 0.006;
+            ring.rotation.z += 0.0015;
+            particles.rotation.y += 0.0007;
+            particles.rotation.x -= 0.0003;
+
+            orbGroup.children.forEach((orb, idx) => {
+                const { radius, speed, offset } = orb.userData;
+                const t = performance.now() * speed + offset;
+                orb.position.x = Math.cos(t) * radius;
+                orb.position.z = Math.sin(t) * radius;
+                orb.position.y = Math.sin(t * 1.6) * 0.7;
+                orb.rotation.x += 0.01;
+                orb.rotation.y += 0.015;
+            });
+
+            camera.position.x += (mouseX * 1.3 - camera.position.x) * 0.02;
+            camera.position.y += (-mouseY * 1.1 - camera.position.y) * 0.02;
             camera.lookAt(0, 0, 0);
             renderer.render(scene, camera);
         }

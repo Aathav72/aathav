@@ -53,6 +53,16 @@ body {
     transition: background 0.35s ease, color 0.35s ease;
 }
 
+#bg3d {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+    filter: saturate(1.05);
+}
+
 body.dark {
     background:
         radial-gradient(140% 140% at 12% 18%, rgba(42,124,255,0.18), transparent 38%),
