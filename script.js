@@ -256,11 +256,6 @@
         contactForm.addEventListener('submit', submitContactForm);
     }
 
-    // --- Three.js background ---
-    function initBackground() {
-        // Background handled by inline three.js script; keep this as a no-op.
-    }
-
     // --- Initialization ---
     function init() {
         setupNav();
@@ -269,7 +264,6 @@
         setupReveal();
         setupModals();
         setupContactForm();
-        initBackground();
         updateScrollProgress();
 
         window.addEventListener('scroll', updateScrollProgress, { passive: true });
