@@ -224,12 +224,16 @@
                 body: JSON.stringify({
                     name,
                     email,
-                    message
+                    message,
+                    _replyto: email,
+                    _subject: `New message from ${name}`
                 })
             });
 
-            if (!response.ok) {
-                throw new Error('Unable to send your message right now.');
+            const data = await response.json().catch(() => ({}));
+
+            if (!response.ok || data?.error) {
+                throw new Error(data?.error || 'Unable to send your message right now.');
             }
 
             contactForm.reset();
