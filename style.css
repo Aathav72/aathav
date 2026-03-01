@@ -36,15 +36,16 @@ html { scroll-behavior: smooth; }
 body {
     font-family: var(--font-sans);
     background:
-        radial-gradient(140% 140% at 12% 18%, rgba(42,124,255,0.12), transparent 42%),
-        radial-gradient(140% 140% at 85% 12%, rgba(123,97,255,0.10), transparent 38%),
-        radial-gradient(120% 120% at 50% 82%, rgba(33,209,183,0.12), transparent 42%),
-        linear-gradient(135deg, rgba(255,166,43,0.12), rgba(255,93,177,0.10)),
+        radial-gradient(140% 140% at 14% 18%, rgba(42,124,255,0.18), transparent 42%),
+        radial-gradient(140% 140% at 82% 12%, rgba(123,97,255,0.16), transparent 38%),
+        radial-gradient(130% 130% at 50% 82%, rgba(33,209,183,0.16), transparent 45%),
+        linear-gradient(135deg, rgba(255,184,92,0.16), rgba(255,112,189,0.14)),
+        linear-gradient(215deg, rgba(17,35,64,0.22), transparent 45%),
         repeating-linear-gradient(45deg,
-            color-mix(in srgb, var(--primary) 8%, transparent) 0,
-            color-mix(in srgb, var(--primary) 8%, transparent) 1px,
+            color-mix(in srgb, var(--primary) 6%, transparent) 0,
+            color-mix(in srgb, var(--primary) 6%, transparent) 1px,
             transparent 1px,
-            transparent 14px),
+            transparent 16px),
         var(--bg);
     color: var(--text);
     line-height: 1.6;
