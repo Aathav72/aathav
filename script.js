@@ -212,35 +212,24 @@
 
         if (hasError) return;
 
-        const payload = {
-            name,
-            email,
-            message,
-            created_at: new Date().toISOString()
-        };
-
-        const supabaseUrl = window.SUPABASE_URL || '';
-        const supabaseKey = window.SUPABASE_ANON_KEY || '';
+        const formspreeEndpoint = 'https://formspree.io/f/xbdaekqy';
 
         try {
-            if (supabaseUrl && supabaseKey) {
-                const response = await fetch(`${supabaseUrl}/rest/v1/messages`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        apikey: supabaseKey,
-                        Authorization: `Bearer ${supabaseKey}`,
-                        Prefer: 'return=minimal'
-                    },
-                    body: JSON.stringify(payload)
-                });
+            const response = await fetch(formspreeEndpoint, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json'
+                },
+                body: JSON.stringify({
+                    name,
+                    email,
+                    message
+                })
+            });
 
-                if (!response.ok) throw new Error('Unable to save message right now.');
-            } else {
-                // Local fallback storage to keep the UX responsive
-                const existing = JSON.parse(localStorage.getItem('contact-messages') || '[]');
-                existing.push(payload);
-                localStorage.setItem('contact-messages', JSON.stringify(existing));
+            if (!response.ok) {
+                throw new Error('Unable to send your message right now.');
             }
 
             contactForm.reset();
